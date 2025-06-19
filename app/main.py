@@ -23,7 +23,13 @@ init_db()
 
 @app.get("/", response_class=HTMLResponse)
 async def index():
-    return FileResponse(BASE_DIR / "static" / "index.html")
+    """Serve the landing page.
+
+    Using ``HTMLResponse`` ensures browsers display the page instead of
+    triggering a download when ``HEAD`` requests are made.
+    """
+    index_path = BASE_DIR / "static" / "index.html"
+    return HTMLResponse(index_path.read_text())
 
 class AppointmentIn(BaseModel):
     name: str
