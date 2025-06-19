@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/static/style.css">
+    <title>AI Integration Agency</title>
+</head>
+<body>
+    <header>
+        <h1>AI Integration Agency</h1>
+        <p>Book an appointment to transform your business with AI.</p>
+    </header>
+    <main>
+        <section class="form-section">
+            <h2>Schedule Appointment</h2>
+            <form id="appointment-form">
+                <input type="text" name="name" placeholder="Your Name" required>
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="datetime-local" name="datetime" required>
+                <textarea name="message" placeholder="Message"></textarea>
+                <button type="submit">Book</button>
+            </form>
+        </section>
+        <section class="list-section">
+            <h2>Upcoming Appointments</h2>
+            <table id="appointments">
+                <thead>
+                    <tr><th>Name</th><th>Email</th><th>Date</th><th>Message</th></tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </section>
+    </main>
+    <script src="/static/app.js"></script>
+</body>
+</html>
