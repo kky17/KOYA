@@ -13,7 +13,12 @@ async function loadAppointments() {
 document.getElementById('appointment-form').addEventListener('submit', async e => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    await fetch('/api/appointments', { method: 'POST', body: formData });
+    const payload = Object.fromEntries(formData.entries());
+    await fetch('/api/appointments', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    });
     e.target.reset();
     loadAppointments();
 });

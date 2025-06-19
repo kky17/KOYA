@@ -1,4 +1,5 @@
-from fastapi import FastAPI, Request, Form
+from fastapi import FastAPI
+from pydantic import BaseModel
 from fastapi.responses import FileResponse, HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
@@ -24,9 +25,21 @@ init_db()
 async def index():
     return FileResponse(BASE_DIR / "static" / "index.html")
 
+class AppointmentIn(BaseModel):
+    name: str
+    email: str
+    datetime: str
+    message: str | None = None
+
+
 @app.post("/api/appointments")
-async def create(name: str = Form(...), email: str = Form(...), datetime: str = Form(...), message: str = Form("")):
-    create_appointment(name, email, datetime, message)
+async def create(app_data: AppointmentIn):
+    create_appointment(
+        app_data.name,
+        app_data.email,
+        app_data.datetime,
+        app_data.message or "",
+    )
     return {"status": "created"}
 
 @app.get("/api/appointments")
